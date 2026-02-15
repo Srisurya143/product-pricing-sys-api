@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
+    <http:listener-config name="product-pricing-sys-api-httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="8081" />
+    </http:listener-config>
+    <apikit:config name="product-pricing-sys-api-config" api="resource::78234722-409d-4d71-aa51-1f55808cb405:product-pricing-sys-api:1.0.0:raml:zip:product-pricing-sys-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <flow name="product-pricing-sys-api-main">
+        <http:listener config-ref="product-pricing-sys-api-httpListenerConfig" path="/api/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body>#[payload]</http:body>
+                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+            </http:error-response>
+        </http:listener>
+		<ee:transform doc:name="initVariables" doc:id="f90dcd09-9320-458c-9c51-72fd5a73e71e">
+			<ee:message />
+			<ee:variables>
+				<ee:set-variable variableName="apiKickOffTime"><![CDATA[%dw 2.0
+import * from dw::util::Timer
+output application/json
+---
+currentMilliseconds()]]></ee:set-variable>
+				<ee:set-variable variableName="resourcePath"><![CDATA[%dw 2.0
+output application/json
+---
+attributes.requestPath]]></ee:set-variable>
+				<ee:set-variable resource="dwl/loggingVars.dwl" variableName="loggingVars" />
+			</ee:variables>
+		</ee:transform>
+		<flow-ref doc:name="common-process-start-logging-subflow" doc:id="0f612695-780f-48cc-8e2b-7e86601ae82d" name="common-process-start-logging-subflow" />
+		<apikit:router config-ref="product-pricing-sys-api-config" />
+		<flow-ref doc:name="common-process-end-logging-subflow" doc:id="a06be864-4f3d-43e9-8059-9a09733e2a13" name="common-process-end-logging-subflow" />
+		<error-handler ref="global-error-handler-error-handler" />
+    </flow>
+    <flow name="product-pricing-sys-api-console">
+        <http:listener config-ref="product-pricing-sys-api-httpListenerConfig" path="/console/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body>#[payload]</http:body>
+                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:console config-ref="product-pricing-sys-api-config" />
+		<error-handler ref="global-error-handler-error-handler" />
+    </flow>
+    <flow name="delete:\products\(productId):product-pricing-sys-api-config">
+		<flow-ref doc:name="delete-product-implementation-subflow" doc:id="cdb7050c-969c-48df-bbc1-1b92ac8f58fa" name="delete-product-implementation-subflow"/>
+    </flow>
+    <flow name="patch:\products\(productId):application\json:product-pricing-sys-api-config">
+		<flow-ref doc:name="update-product-implementation-subflow" doc:id="fe27331b-93a6-4e04-a3d9-c2975eb95a68" name="update-product-implementation-subflow"/>
+    </flow>
+    <flow name="get:\health-check:product-pricing-sys-api-config">
+		<flow-ref doc:name="healthcheck-implementation-subflow" doc:id="4234f104-ad55-490c-bdb7-b7f56e087b27" name="healthcheck-implementation-subflow"/>
+    </flow>
+    <flow name="get:\ping:product-pricing-sys-api-config">
+		<flow-ref doc:name="ping-implementation-subflow" doc:id="c6655401-3aa1-40bb-8d96-064318797f7f" name="ping-implementation-subflow"/>
+    </flow>
+    <flow name="get:\products:product-pricing-sys-api-config">
+		<flow-ref doc:name="get-products-implementation-subflow" doc:id="be6e26a5-90df-4942-bbc0-76e790a3205d" name="get-products-implementation-subflow"/>
+    </flow>
+    <flow name="post:\products:application\json:product-pricing-sys-api-config">
+		<flow-ref doc:name="post-products-implementation-subflow" doc:id="6cde1af4-a9c7-4db3-9379-76ef4eedfa08" name="post-products-implementation-subflow"/>
+    </flow>
+</mule>
