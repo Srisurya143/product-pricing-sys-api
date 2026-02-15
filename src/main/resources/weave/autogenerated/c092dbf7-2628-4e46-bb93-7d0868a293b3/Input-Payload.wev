@@ -1,5 +1,0 @@
-%dw 2.0
-
-type auto_c092dbf7_2628_4e46_bb93_7d0868a293b3_Input_Payload = Array<{|  productCode?: String,   productId?: String,   description?: String,   currencyCode: String,   productName?: String,   productPrice: Number|}> {"description": "List of products To Be Created.",
-"label": "CreateProductListRequest"}
-

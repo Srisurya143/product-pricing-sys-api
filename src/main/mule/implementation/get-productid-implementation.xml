@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+	<sub-flow name="get-productid-implementation-subflow" doc:id="6472da87-f2ba-45b4-94ce-ec88eaddd40d" >
+		<ee:transform doc:name="updateFlowname" doc:id="72761773-fb2e-42f2-83bd-ca1294354725" >
+			<ee:message />
+			<ee:variables >
+				<ee:set-variable variableName="flowName" ><![CDATA[%dw 2.0
+output application/json
+---
+vars.loggingVars update {
+	case .flowName -> flow.name
+}
+]]></ee:set-variable>
+				<ee:set-variable variableName="queryProductId" ><![CDATA[%dw 2.0
+output application/json
+---
+"SELECT Id FROM Product2 where ExternalId__c= '" ++ attributes.uriParams.'productId' ++ "'"]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<flow-ref doc:name="common-flow-start-logging-subflow" doc:id="c5e0401e-ca04-41ee-bcf0-f8e476bd13af" name="common-flow-start-logging-subflow" />
+		<flow-ref doc:name="common-before-request-logging-subflow" doc:id="7d55f820-cda4-4ae9-b826-b4e5b3185469" name="common-before-request-logging-subflow"/>
+		<salesforce:query doc:name="Query" doc:id="cf716516-b6b3-4e86-966d-f14bb8f16324" config-ref="Salesforce_Config">
+			<salesforce:salesforce-query><![CDATA[#[vars.queryProductId]]]></salesforce:salesforce-query>
+		</salesforce:query>
+		<flow-ref doc:name="common-after-request-logging-subflow" doc:id="e24eb447-aa5a-419c-9d75-462f80972a4c" name="common-after-request-logging-subflow"/>
+		<flow-ref doc:name="common-flow-end-logging-subflow" doc:id="b3e4a4fe-3913-4d1a-a163-2fe09196cbdd" name="common-flow-end-logging-subflow" />
+	</sub-flow>
+</mule>

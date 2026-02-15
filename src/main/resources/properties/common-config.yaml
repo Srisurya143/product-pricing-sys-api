@@ -1,5 +1,5 @@
 api:
-  Name: "product-pricing-exp-api"
+  Name: "product-pricing-sys-api"
   Version: "1.0.0"
   status: "Running"
 
@@ -12,8 +12,6 @@ http:
     readTimeout: "30000"
     keystore:
       path: "certs/listener.jks"
-    truststore:
-      path: "certs/truststore.jks"
     connection:
       idealTimeout: "40000"
 https:

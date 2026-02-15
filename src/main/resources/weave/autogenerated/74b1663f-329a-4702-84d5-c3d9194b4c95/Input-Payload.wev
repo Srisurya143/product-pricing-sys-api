@@ -1,9 +1,0 @@
-%dw 2.0
-
-type auto_74b1663f_329a_4702_84d5_c3d9194b4c95_Input_Payload = {|
-  productId: String, 
-  successful: Boolean, 
-  salesforceId: String
-|} {"mediaType": "application/json",
-"encoding": "UTF-8"}
-

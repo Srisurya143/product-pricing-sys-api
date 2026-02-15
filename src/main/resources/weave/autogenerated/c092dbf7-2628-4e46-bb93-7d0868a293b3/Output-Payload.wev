@@ -1,5 +1,0 @@
-%dw 2.0
-
-type auto_c092dbf7_2628_4e46_bb93_7d0868a293b3_Output_Payload = Array<{  productId: String,   salesforceId: String,   successful: Boolean,   _?: Any}> {"label": "CreateProductListResponse",
-"description": "List of operation results for product create actions."}
-

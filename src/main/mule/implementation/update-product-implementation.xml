@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
-	xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
 	<sub-flow name="update-product-implementation-subflow" doc:id="7957e9d0-df71-47f3-890e-ecdc4d1f820b" >
 		<ee:transform doc:name="updateFlowname" doc:id="fc9dd9ff-d2e6-4ff9-9657-94a62f0c2452" >
 			<ee:message />
@@ -20,13 +21,34 @@ vars.loggingVars update {
 		</ee:transform>
 		<flow-ref doc:name="common-flow-start-logging-subflow" doc:id="468c561c-a8ae-4a27-bbac-fcf644143bc7" name="common-flow-start-logging-subflow" />
 		<flow-ref doc:name="common-before-request-logging-subflow" doc:id="f4356465-a792-4c56-bea4-5858c6392292" name="common-before-request-logging-subflow" />
-		<http:request doc:name="productsPricingPrcApiUpdateRequest" doc:id="0a499708-663b-477e-9a27-8e12809c9fc0" config-ref="product-pricing-prc-api-httpRequester-config" method="PATCH" path="${productPricingPrcApi.productByIdPath}" >
-			<http:uri-params ><![CDATA[#[output application/java
+		<flow-ref doc:name="get-productid-implementation-subflow" doc:id="210dc61f-d574-4256-8997-a54307336424" name="get-productid-implementation-subflow" target="productId"/>
+		<ee:transform doc:name="updateProductRquestPayload" doc:id="d4317355-3179-46f9-9dbc-549f176ab820">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
 ---
-{
-	productId : attributes.uriParams.'productId'
-}]]]></http:uri-params>
-		</http:request>
+[
+	{
+		"ExternalId__c"    : payload.productId,
+		"CurrencyCode__c"  : payload.currencyCode,
+		"Description"      : payload.description,
+		"Name"             : payload.productName,
+		"ProductPrice__c"  : payload.productPrice,
+		"Id"               : vars.productId[0].Id
+	
+     }
+]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<salesforce:update type="Product2" doc:name="Update" doc:id="7a80e026-36bf-45d9-93c9-7dba91dcc578" config-ref="Salesforce_Config"/>
+		<ee:transform doc:name="salesforceResponse" doc:id="bd923b20-ce16-485f-aa7d-4d97a5f88390" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
 		<flow-ref doc:name="common-after-request-logging-subflow" doc:id="ec45aeaa-4599-46e0-890a-dc334e54f746" name="common-after-request-logging-subflow" />
 		<flow-ref doc:name="common-flow-end-logging-subflow" doc:id="102c9e9a-3f27-4346-aa06-9a98b5351ac3" name="common-flow-end-logging-subflow" />
 	</sub-flow>
