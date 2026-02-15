@@ -22,6 +22,25 @@ vars.loggingVars update {
 		<flow-ref doc:name="common-flow-start-logging-subflow" doc:id="2c4704b1-3938-45b5-8fe9-d7174d5b4017" name="common-flow-start-logging-subflow" />
 		<flow-ref doc:name="common-before-request-logging-subflow" doc:id="1b1755bb-e3db-43c2-a50e-761f069402f2" name="common-before-request-logging-subflow"/>
 		<flow-ref doc:name="get-productid-implementation-subflow" doc:id="a2bf1c47-6f33-4393-acda-1bca4312bb37" name="get-productid-implementation-subflow"/>
+		<choice doc:name="Choice" doc:id="b9010f7b-dbb1-4b91-9d9b-1ab0a2d8701d">
+				<when expression="#[isEmpty(vars.productId[0].Id)]">
+					<raise-error doc:name="Raise error" doc:id="189e6ed3-ddf9-4bde-ae65-e8abbd0514da" type="PRODUCTID:NOTFOUND" description="The product that you are trying to delete is not avilable in salesforce" />
+					<ee:transform doc:name="errorResponse" doc:id="9d3e089e-7cc7-4e95-a5d4-ebb8d6016fb0">
+						<ee:message>
+							<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"errorType": error.errorType,
+	"errorMessage": error.description
+}]]></ee:set-payload>
+						</ee:message>
+						<ee:variables>
+							<ee:set-variable variableName="httpVars"><![CDATA[500]]></ee:set-variable>
+						</ee:variables>
+					</ee:transform>
+				</when>
+			</choice>
 		<salesforce:delete doc:id="f5b31d3b-f891-45e7-b2d8-763c2e24e8ec" config-ref="Salesforce_Config" >
 			<salesforce:ids ><![CDATA[#[payload.'Id']]]></salesforce:ids>
 		</salesforce:delete>
