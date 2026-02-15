@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 output application/json
 ---
 vars.loggingVars update {
-	case .flowName -> flow.name
+	case .flowName -> "get-productid-implementation-subflow"
 }
 ]]></ee:set-variable>
 				<ee:set-variable variableName="queryProductId" ><![CDATA[%dw 2.0

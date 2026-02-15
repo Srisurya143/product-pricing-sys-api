@@ -14,7 +14,7 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 output application/json
 ---
 vars.loggingVars update {
-	case .flowName -> flow.name
+	case .flowName -> "delete-product-implementation-subflow"
 }
 ]]></ee:set-variable>
 			</ee:variables>

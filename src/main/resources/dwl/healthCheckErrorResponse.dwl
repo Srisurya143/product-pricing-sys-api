@@ -1,0 +1,9 @@
+%dw 2.0
+output application/json
+---
+{
+    application: "salesforce health check for env " ++ p('mule.env'),
+    message: "salesforce is not reachable",
+    error: (error.detailedDescription default "Unknown error"),
+    code: "ERROR"
+}
