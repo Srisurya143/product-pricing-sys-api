@@ -21,9 +21,25 @@ vars.loggingVars update {
 		</ee:transform>
 		<flow-ref doc:name="common-flow-start-logging-subflow" doc:id="bd1381a6-f93e-4ecc-b017-a663b770e456" name="common-flow-start-logging-subflow" />
 		<flow-ref doc:name="common-before-request-logging-subflow" doc:id="f1d5f197-8f65-4949-9ec0-93e3c9b57f02" name="common-before-request-logging-subflow" />
-		<salesforce:query doc:name="Query" doc:id="b8752e6d-20be-4700-a84d-15db90563ca9" config-ref="Salesforce_Config">
-			<salesforce:salesforce-query ><![CDATA[SELECT ProductCode, ExternalId__c, CurrencyCode__c, Description, Name, ProductPrice__c From Product2 LIMIT 10 OFFSET 20]]></salesforce:salesforce-query>
+		<ee:transform doc:name="getAllProductsQuery" doc:id="cce56056-c0db-4058-a88f-597df9e599d2" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+"SELECT ProductCode, ExternalId__c, CurrencyCode__c, Description, Name, ProductPrice__c From Product2 ORDER BY CreatedDate DESC LIMIT " ++ attributes.queryParams.'limit' ++ " OFFSET " ++ attributes.queryParams.'offset']]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<salesforce:query doc:name="Query" doc:id="b8752e6d-20be-4700-a84d-15db90563ca9" config-ref="Salesforce_Config" targetValue="#[output json --- payload]">
+			<salesforce:salesforce-query ><![CDATA[#[payload]]]></salesforce:salesforce-query>
 		</salesforce:query>
+		<ee:transform doc:name="getAllProductsResponse" doc:id="1b385267-53e8-4d07-8bd0-73994288cffa" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
 		<flow-ref doc:name="common-after-request-logging-subflow" doc:id="db69f471-8196-40d9-a480-ffe4a42c981a" name="common-after-request-logging-subflow" />
 		<flow-ref doc:name="common-flow-end-logging-subflow" doc:id="6b196172-8c4a-4f2d-bd8c-5da8824fc4c8" name="common-flow-end-logging-subflow" />
 	</sub-flow>
