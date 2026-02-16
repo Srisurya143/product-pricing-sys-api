@@ -29,20 +29,7 @@ vars.loggingVars update {
 		</choice>
 		<ee:transform doc:name="updateProductRquestPayload" doc:id="d4317355-3179-46f9-9dbc-549f176ab820">
 			<ee:message>
-				<ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-[
-	{
-		"ExternalId__c"    : payload.productId,
-		"CurrencyCode__c"  : payload.currencyCode,
-		"Description"      : payload.description,
-		"Name"             : payload.productName,
-		"ProductPrice__c"  : payload.productPrice,
-		"Id"               : vars.productId[0].Id
-	
-     }
-]]]></ee:set-payload>
+				<ee:set-payload resource="dwl/updateProductRequestPayload.dwl" />
 			</ee:message>
 		</ee:transform>
 		<salesforce:update type="Product2" doc:name="Update" doc:id="7a80e026-36bf-45d9-93c9-7dba91dcc578" config-ref="salesforce-config"/>
