@@ -24,6 +24,9 @@
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="b8752e6d-20be-4700-a84d-15db90563ca9" attributeName="doc:id" />
 				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output json --- readUrl('classpath://testVars/post-payload.json')]" mediaType="application/json" encoding="UTF-8" />
+				</munit-tools:then-return>
 			</munit-tools:mock-when>
 			<munit-tools:mock-when doc:name="common-after-request-logging-subflow" doc:id="5677d8cb-b99f-4078-b321-d511b00c1e94" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -37,6 +40,10 @@
 			</munit-tools:mock-when>
 		</munit:behavior>
 		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="a3470242-b8fb-450f-9883-7610df65b244" >
+				<munit:payload value="#[output json --- readUrl('classpath://testVars/post-payload.json')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[output json --- readUrl('classpath://testVars/attributes.json')]" encoding="UTF-8" mediaType="application/json" />
+			</munit:set-event>
 			<flow-ref doc:name="Flow-ref to get-products-implementation-subflow" doc:id="21944cc6-dce5-40ce-af59-6004dfeb766e" name="get-products-implementation-subflow"/>
 		</munit:execution>
 		<munit:validation >

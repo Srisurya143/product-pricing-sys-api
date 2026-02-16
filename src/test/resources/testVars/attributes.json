@@ -1,0 +1,10 @@
+{
+  "queryParams": {
+    "limit": "10",
+    "offset": "0"
+  },
+  "uriParams": {
+		"productId" : "00000001234"
+	},
+  "headers": {}
+}

@@ -43,7 +43,10 @@
 		</munit:behavior>
 		<munit:execution >
 			<munit:set-event doc:name="Set Event" doc:id="cfdd7a42-79de-4d6a-853b-782a9d8bcffb">
-				<munit:payload value='#[readUrl("classpath:/testVars/post-payload.json","application/json")]' encoding="UTF-8" mediaType="application/json" />
+				<munit:payload value='#[output json --- readUrl("classpath://testVars/post-payload.json","application/json")]' encoding="UTF-8" mediaType="application/json" />
+				<munit:variables >
+					<munit:variable key="productId" value='#[output json --- readUrl("classpath://testVars/deleteProductTest.json","application/json")]' encoding="UTF-8" mediaType="application/json" />
+				</munit:variables>
 			</munit:set-event>
 			<flow-ref doc:name="Flow-ref to update-product-implementation-subflow" doc:id="d4a185ef-bc33-4eba-8c4e-37fa15ea90e9" name="update-product-implementation-subflow"/>
 		</munit:execution>

@@ -20,12 +20,17 @@
 					<munit-tools:with-attribute whereValue="7d55f820-cda4-4ae9-b826-b4e5b3185469" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 			</munit-tools:mock-when>
-			<munit-tools:mock-when doc:name="salesforce-query" doc:id="6734cc38-3937-474c-a258-2be38700315c" processor="salesforce:query">
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="cf716516-b6b3-4e86-966d-f14bb8f16324" attributeName="doc:id" />
-				</munit-tools:with-attributes>
-			</munit-tools:mock-when>
-			<munit-tools:mock-when doc:name="common-after-request-logging-subflow" doc:id="d99dd56c-3227-489e-89fe-b122ec51c270" processor="flow-ref">
+			<munit-tools:mock-when doc:name="salesforce-query"
+                       processor="salesforce:query">
+    <munit-tools:with-attributes>
+        <munit-tools:with-attribute
+            whereValue="cf716516-b6b3-4e86-966d-f14bb8f16324"
+            attributeName="doc:id" />
+    </munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="readUrl('classpath://testVars/getProductByIdTest.json')" mediaType="application/json" encoding="UTF-8" />
+				</munit-tools:then-return>
+</munit-tools:mock-when><munit-tools:mock-when doc:name="common-after-request-logging-subflow" doc:id="d99dd56c-3227-489e-89fe-b122ec51c270" processor="flow-ref">
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="e24eb447-aa5a-419c-9d75-462f80972a4c" attributeName="doc:id" />
 				</munit-tools:with-attributes>
@@ -38,7 +43,7 @@
 		</munit:behavior>
 		<munit:execution >
 			<munit:set-event doc:name="Set Event" doc:id="5ae8621c-607d-4dfb-8531-8af084953ce3" >
-				<munit:attributes value='#[output json&#10;---&#10;{&#10;	"uriParams" : {&#10;		"productId" : "00000001234"&#10;	}&#10;}&#10;]' encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://testVars/attributes.json')]" encoding="UTF-8" mediaType="application/json" />
 			</munit:set-event>
 			<flow-ref doc:name="Flow-ref to get-productid-implementation-subflow" doc:id="ad0ca51c-7b30-4cc5-8220-993fd50360cd" name="get-productid-implementation-subflow"/>
 		</munit:execution>
