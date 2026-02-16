@@ -34,10 +34,7 @@ output application/json
 		</salesforce:query>
 		<ee:transform doc:name="getAllProductsResponse" doc:id="1b385267-53e8-4d07-8bd0-73994288cffa" >
 			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-payload]]></ee:set-payload>
+				<ee:set-payload resource="dwl/getProductsResponse.dwl" />
 			</ee:message>
 		</ee:transform>
 		<flow-ref doc:name="common-after-request-logging-subflow" doc:id="db69f471-8196-40d9-a480-ffe4a42c981a" name="common-after-request-logging-subflow" />
