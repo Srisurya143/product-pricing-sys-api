@@ -1,2 +1,9 @@
 api:
-  id: ""
+  id: "20742088"
+  
+salesforce:
+  oauth:
+    keyStore: "certs/00Dg50000050aF7.jks"
+    certificateAlias: "mule_jwt_certs"
+    tokenEndpoint: "https://login.salesforce.com/services/oauth2/token"
+

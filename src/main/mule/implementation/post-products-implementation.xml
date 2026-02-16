@@ -40,7 +40,7 @@ payload map
 ]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<salesforce:create doc:name="Create" doc:id="f56213bb-a0bf-4577-a671-e2245f3ccc88" config-ref="Salesforce_Config" type="Product2"/>
+		<salesforce:create doc:name="Create" doc:id="f56213bb-a0bf-4577-a671-e2245f3ccc88" config-ref="salesforce-config" type="Product2"/>
 		<ee:transform doc:name="salesforceResponse" doc:id="07e8190e-c3ae-45e6-b431-1e741f0c0425">
 			<ee:message>
 				<ee:set-payload><![CDATA[%dw 2.0

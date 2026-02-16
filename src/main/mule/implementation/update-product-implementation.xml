@@ -45,7 +45,7 @@ output application/json
 ]]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<salesforce:update type="Product2" doc:name="Update" doc:id="7a80e026-36bf-45d9-93c9-7dba91dcc578" config-ref="Salesforce_Config"/>
+		<salesforce:update type="Product2" doc:name="Update" doc:id="7a80e026-36bf-45d9-93c9-7dba91dcc578" config-ref="salesforce-config"/>
 		<ee:transform doc:name="salesforceResponse" doc:id="bd923b20-ce16-485f-aa7d-4d97a5f88390" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0

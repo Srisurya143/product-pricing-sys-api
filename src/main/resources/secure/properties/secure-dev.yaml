@@ -2,5 +2,10 @@ http:
   listener:
     keystore:
       alias: "![EIBPJ+SJgIcIxbfNP9kctA==]"
-      keyPassword: "![NFZa7oEbEOuPeeQSAa/SbA==]"
-      password: "![NFZa7oEbEOuPeeQSAa/SbA==]"
+      keyPassword: "![jcKYSgOcSTmM+vOlvkyoZg==]"
+      password: "![jcKYSgOcSTmM+vOlvkyoZg==]"
+salesforce:
+  oauth:
+    consumerKey: "![2cjb9p7+q2pL3k4QqtisARYQ0tNF6AB3jlEN0LZDzvPY3gGfH6FeLxFQ0Qkcg4zxENCr3fRZcuTyHxLFV4Qx/oibS1ryTB6PGZHwMYAyK06Kuf/KK5uvWyqrhprLNUcM]"
+    storePassword: "![GUs9TsaivyqFW76rWC3lCg==]"
+    principal: "![xyUO2xM54zNjRHEivd5dBzG6DBksBddC1hbfvkx957Fk5ucO4OdbMnRnz8zeIXR7]"
