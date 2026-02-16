@@ -74,13 +74,6 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>78234722-409d-4d71-aa51-1f55808cb405</groupId>
-			<artifactId>product-pricing-sys-api</artifactId>
-			<version>1.0.0</version>
-			<classifier>raml</classifier>
-			<type>zip</type>
-		</dependency>
-		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-apikit-module</artifactId>
 			<version>1.11.11</version>
@@ -103,20 +96,27 @@
 			<artifactId>munit-runner</artifactId>
 			<version>3.7.0</version>
 			<classifier>mule-plugin</classifier>
-			 <scope>test</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.mulesoft.munit</groupId>
 			<artifactId>munit-tools</artifactId>
 			<version>3.7.0</version>
 			<classifier>mule-plugin</classifier>
-			 <scope>test</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mule.weave</groupId>
 			<artifactId>assertions</artifactId>
 			<version>1.2.1</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>78234722-409d-4d71-aa51-1f55808cb405</groupId>
+			<artifactId>product-pricing-sys-api</artifactId>
+			<version>1.0.1</version>
+			<classifier>raml</classifier>
+			<type>zip</type>
 		</dependency>
 	</dependencies>
 
