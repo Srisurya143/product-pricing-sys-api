@@ -25,20 +25,6 @@ vars.loggingVars update {
 		<choice doc:name="Choice" doc:id="202c362a-752a-4761-8c0f-27acf60d86e8" >
 			<when expression="#[isEmpty(vars.productId[0].Id)]">
 				<raise-error doc:name="Raise error" doc:id="fe705309-d000-42c3-9d1b-4ee0dae7509d" type="PRODUCTID:NOTFOUND" description="The product that you are trying to update is not avilable in salesforce"/>
-				<ee:transform doc:name="errorResponse" doc:id="9329ac6b-7f71-4754-8a0a-3a34f305c5a4" >
-					<ee:message >
-						<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-{
-	"errorType": error.errorType,
-	"errorMessage": error.description
-}]]></ee:set-payload>
-					</ee:message>
-					<ee:variables >
-						<ee:set-variable variableName="httpVars" ><![CDATA[500]]></ee:set-variable>
-					</ee:variables>
-				</ee:transform>
 			</when>
 		</choice>
 		<ee:transform doc:name="updateProductRquestPayload" doc:id="d4317355-3179-46f9-9dbc-549f176ab820">

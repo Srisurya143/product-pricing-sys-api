@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="delete-product-implementation-test-suite.xml" />
+	<munit:test name="delete-product-implementation-test-suite-delete-product-implementation-subflowTest" doc:id="194ee13a-c273-4be1-addb-5fab8a8d196f" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="common-flow-start-logging-subflow" doc:id="de4955a8-d776-4cd7-bf56-69b8a7008a6e" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="2c4704b1-3938-45b5-8fe9-d7174d5b4017" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-before-request-logging-subflow" doc:id="79ba072c-10d1-4e37-902f-7812783df8c9" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="1b1755bb-e3db-43c2-a50e-761f069402f2" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="get-productid-implementation-subflow" doc:id="ea429a6c-3ae5-4b71-b436-0f4c365f7c1e" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="a2bf1c47-6f33-4393-acda-1bca4312bb37" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="salesforce-delete" doc:id="f8123432-71ce-45a8-82af-9d4b91a0a1fc" processor="salesforce:delete">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="f5b31d3b-f891-45e7-b2d8-763c2e24e8ec" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-after-request-logging-subflow" doc:id="53242f76-31cb-40ad-af30-b4acdbade676" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="52ef981b-5c03-4bf8-9c57-23bf5ad1b891" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-flow-end-logging-subflow" doc:id="67e577cb-e6fe-4a5c-9dc0-1ef6c9a246cd" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="14567495-4dc2-4804-88b9-ca982b8792f1" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to delete-product-implementation-subflow" doc:id="f0aea24d-9d88-4814-b530-f0ceab20f681" name="delete-product-implementation-subflow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="salesforce-delete" doc:id="f0a899e4-5927-4749-8818-3b82c2b9d640" processor="salesforce:delete">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="f5b31d3b-f891-45e7-b2d8-763c2e24e8ec" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:assert doc:name="sfdc-delete-response" doc:id="94bc9e06-b8f9-4beb-b7fd-518d0df04c16" />
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

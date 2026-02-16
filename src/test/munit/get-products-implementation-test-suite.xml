@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="get-products-implementation-test-suite.xml" />
+	<munit:test name="get-products-implementation-test-suite-get-products-implementation-subflowTest" doc:id="4393c509-edda-49ee-834c-6b0dd973cfbd" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="common-flow-start-logging-subflow" doc:id="d043c758-9971-43c5-afb1-14fa27ad8401" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bd1381a6-f93e-4ecc-b017-a663b770e456" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-before-request-logging-subflow" doc:id="1e8159c7-adb8-4b66-8ccd-6f8629dae9b5" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="f1d5f197-8f65-4949-9ec0-93e3c9b57f02" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="sfdc-query" doc:id="7443a627-198a-4ae2-ae91-f91f3f110451" processor="salesforce:query">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b8752e6d-20be-4700-a84d-15db90563ca9" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-after-request-logging-subflow" doc:id="5677d8cb-b99f-4078-b321-d511b00c1e94" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="db69f471-8196-40d9-a480-ffe4a42c981a" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-flow-end-logging-subflow" doc:id="83d7a95d-c067-43be-86d4-7940746f9754" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="6b196172-8c4a-4f2d-bd8c-5da8824fc4c8" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get-products-implementation-subflow" doc:id="21944cc6-dce5-40ce-af59-6004dfeb766e" name="get-products-implementation-subflow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="salesforce-query" doc:id="11aac36c-f95a-4342-9663-24ec008828b0" processor="salesforce:query" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b8752e6d-20be-4700-a84d-15db90563ca9" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:assert doc:name="sfdc-query-response" doc:id="872d057f-2755-441f-9e6d-63a65e7acc49" />
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

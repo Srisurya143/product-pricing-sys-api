@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="update-product-implementation-test-suite.xml" />
+	<munit:test name="update-product-implementation-test-suite-update-product-implementation-subflowTest" doc:id="52396200-9511-4c74-9b36-ecb8f0e242ce" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="common-flow-start-logging-subflow" doc:id="fbcbbb8c-358f-4cb9-9cfc-8a8b2c8392d6" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="468c561c-a8ae-4a27-bbac-fcf644143bc7" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-before-request-logging-subflow" doc:id="4236e021-b351-4acd-bf86-12b4baa38fae" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="f4356465-a792-4c56-bea4-5858c6392292" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="get-productid-implementation-subflow" doc:id="56cd717b-d7b0-4b52-af5f-7c03f7a6910f" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="210dc61f-d574-4256-8997-a54307336424" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="sfdc-update" doc:id="d934cc1e-7f2f-48a1-bb74-e96c515a6c87" processor="salesforce:update">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="7a80e026-36bf-45d9-93c9-7dba91dcc578" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-after-request-logging-subflow" doc:id="7ad67a2e-b06e-45d5-8f6a-2ccdf174d60a" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="ec45aeaa-4599-46e0-890a-dc334e54f746" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-flow-end-logging-subflow" doc:id="18b863cc-dc1b-4a2c-b94c-45529e6cd939" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="102c9e9a-3f27-4346-aa06-9a98b5351ac3" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="cfdd7a42-79de-4d6a-853b-782a9d8bcffb">
+				<munit:payload value='#[readUrl("classpath:/testVars/post-payload.json","application/json")]' encoding="UTF-8" mediaType="application/json" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to update-product-implementation-subflow" doc:id="d4a185ef-bc33-4eba-8c4e-37fa15ea90e9" name="update-product-implementation-subflow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="sfdc-update" doc:id="78b6b376-1450-4ecf-99ca-ba7ee7dea284" processor="salesforce:update">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="7a80e026-36bf-45d9-93c9-7dba91dcc578" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="common-logging-test-suite.xml" />
+	<munit:test name="common-logging-test-suite-common-process-start-logging-subflowTest" doc:id="868a3236-b8ed-44e4-a278-7b03ced06d40" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="3eaf1362-bee7-4dee-8f33-8914642cbb80">
+				<munit:variables >
+					<munit:variable key="loggingVars" value='#[output application/json --- readUrl("classpath://testVars/loggingVars.json", "application/json")]' encoding="UTF-8" mediaType="application/json" />
+					<munit:variable key="apiKickOffTime" value='#[output json --- "1771155011162"]' encoding="UTF-8" mediaType="application/json" />
+				</munit:variables>
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to common-process-start-logging-subflow" doc:id="c41b9ff3-15f8-4ab9-b35c-60bd1a6d7bf2" name="common-process-start-logging-subflow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call processStartLogger" doc:id="d36de30e-1c18-4706-9394-41bd0a545e83" processor="logger" atLeast="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="17c8ce7d-f89b-4b53-852d-b83e0e8ec338" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="common-logging-test-suite-common-process-end-logging-subflowTest" doc:id="a3caf0cc-13ab-4fa3-9a76-bc294fdcd3f3" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="47488220-6763-4d66-bcd0-d9dfccd01b02">
+				<munit:variables >
+					<munit:variable key="loggingVars" value='#[output application/json --- readUrl("classpath://testVars/loggingVars.json", "application/json")]' encoding="UTF-8" mediaType="application/json" />
+					<munit:variable key="apiKickOffTime" value='#[output json --- "1771155011162"]' encoding="UTF-8" mediaType="application/json" />
+				</munit:variables>
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to common-process-end-logging-subflow" doc:id="7dcb70f1-0204-4a80-9196-fa0b11f34d3f" name="common-process-end-logging-subflow"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:verify-call doc:name="Verify call processEndLogger" doc:id="729942ab-58a5-40b3-98f0-6ae76300d919" processor="logger" atLeast="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="55fb83cb-df45-46ca-9df3-40f4aa6b3543" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="common-logging-test-suite-common-flow-start-logging-subflowTest" doc:id="9d9b16c2-9096-45ef-a064-2d3673d61f3a" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Copy_of_Set Event" doc:id="44619385-b507-4d9e-949a-0c3222008c06">
+				<munit:variables >
+					<munit:variable key="loggingVars" value='#[output application/json --- readUrl("classpath://testVars/loggingVars.json", "application/json")]' encoding="UTF-8" mediaType="application/json" />
+					<munit:variable key="apiKickOffTime" value='#[output json --- "1771155011162"]' encoding="UTF-8" mediaType="application/json" />
+				</munit:variables>
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to common-flow-start-logging-subflow" doc:id="996a1155-2ba6-4e53-aa10-d6069e56ade8" name="common-flow-start-logging-subflow"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:verify-call doc:name="Verify call flowStartLogger" doc:id="8cdb79bf-6ffc-4a5e-8754-a10df234e9cd" processor="logger" atLeast="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="c2455d22-0cb4-4c65-8947-326e7ec3107d" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="common-logging-test-suite-common-flow-end-logging-subflowTest" doc:id="5e580f5a-5f94-4fe1-a8f3-fdad1c129f08" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="d2df45a0-e945-4c0f-9a3e-66ddbd5cb74e" >
+				<munit:variables >
+					<munit:variable key="loggingVars" value='#[output application/json --- readUrl("classpath://testVars/loggingVars.json", "application/json")]' encoding="UTF-8" mediaType="application/json" />
+					<munit:variable key="apiKickOffTime" value='#[output json --- "1771155011162"]' encoding="UTF-8" mediaType="application/json" />
+				</munit:variables>
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to common-flow-end-logging-subflow" doc:id="6cfa3a06-da31-430b-9cde-6e2eebc5f66b" name="common-flow-end-logging-subflow" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call flowEndLogger" doc:id="d68ae80d-0b5d-445d-a0b4-e778fc0a1489" processor="logger">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="c2a04d64-6aec-42b8-b4a2-d3699cfc6334" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="common-logging-test-suite-common-before-request-logging-subflowTest" doc:id="6b86ef27-8097-46a9-9142-dd9c497f8820" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="d146d921-1d5a-4bb7-b3bf-759ec7591279" >
+				<munit:variables >
+					<munit:variable key="loggingVars" value='#[output application/json --- readUrl("classpath://testVars/loggingVars.json", "application/json")]' encoding="UTF-8" mediaType="application/json" />
+					<munit:variable key="apiKickOffTime" value='#[output json --- "1771155011162"]' encoding="UTF-8" mediaType="application/json" />
+				</munit:variables>
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to common-before-request-logging-subflow" doc:id="41f15786-6269-462c-9db8-0614e2503d29" name="common-before-request-logging-subflow" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call beforeRequest" doc:id="0195e988-017b-4b2a-b3c6-57614613fbab" processor="logger">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="6382ac7a-b85d-4b60-bf88-6da5b926a673" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="common-logging-test-suite-common-after-request-logging-subflowTest" doc:id="a85730ea-a91d-45af-a747-514435c7197c" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="0d14f7e6-054c-4081-954c-44301908ad58" >
+				<munit:variables >
+					<munit:variable key="loggingVars" value='#[output application/json --- readUrl("classpath://testVars/loggingVars.json", "application/json")]' encoding="UTF-8" mediaType="application/json" />
+					<munit:variable key="apiKickOffTime" value='#[output json --- "1771155011162"]' encoding="UTF-8" mediaType="application/json" />
+				</munit:variables>
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to common-after-request-logging-subflow" doc:id="e3f2e35c-0966-4750-93c3-eed8a080c153" name="common-after-request-logging-subflow" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call afterRequest" doc:id="19428919-ad1e-4e74-b347-81dac3502e01" processor="logger">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3f617807-4da3-4f6b-aa01-f5cf59e10f60" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

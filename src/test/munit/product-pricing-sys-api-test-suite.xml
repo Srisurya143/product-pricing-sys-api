@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="product-pricing-sys-api-test-suite.xml" />
+	<munit:test name="product-pricing-sys-api-test-suite-apikit-not-found-test" doc:id="0b77c916-3353-48c3-ac67-bd423a2603e9" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="fbecf513-71fb-48a2-a9c4-ea7a00898d3d" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="0f612695-780f-48cc-8e2b-7e86601ae82d" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="APIkit Router" doc:id="8f968aee-ade8-41f7-a944-2757a194200e" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-process-end-logging-subflow" doc:id="25a4f652-0e55-4382-b5b5-d73ff6e5ac3d" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="a06be864-4f3d-43e9-8059-9a09733e2a13" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to product-pricing-sys-api-main" doc:id="6360dfb9-0926-41d7-8f21-077e000176d2" name="product-pricing-sys-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="APIkit Router" doc:id="c2ed29a8-f8b5-4e7a-bb5b-44821c9552be" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:assert-equals doc:name="message" doc:id="b41c4847-f175-4fe3-89f5-da55e6f94119" actual="#[payload.message]" expected='#["Resource not found"]' />
+		</munit:validation>
+	
+</munit:test>
+	<munit:test name="product-pricing-sys-api-test-suite-method-not-allowed-test" doc:id="c0b71ac6-562e-4afa-ba10-dc8fa6e46fa5" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="edb24966-537f-45bd-b762-eed7af70eb6f" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="0f612695-780f-48cc-8e2b-7e86601ae82d" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="APIkit Router" doc:id="ab5b5311-5622-4f00-b8ec-32f81f4c3429" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-process-end-logging-subflow" doc:id="63ecea98-0f71-456b-a609-81028ac412b6" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="a06be864-4f3d-43e9-8059-9a09733e2a13" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to product-pricing-sys-api-main" doc:id="c6d5d714-47fa-412d-a356-4e8ec94f5b4b" name="product-pricing-sys-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="APIkit Router" doc:id="b6579ef6-fa1f-41da-9b4e-db714a96b22f" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:assert-equals doc:name="message" doc:id="20375adf-9265-47c0-95a3-a5e138b9047d" actual="#[payload.message]" expected='#["Method not allowed"]' />
+		
+</munit:validation>
+	
+</munit:test>
+	<munit:test name="product-pricing-sys-api-test-suite-not-acceptable-test" doc:id="ed0c496c-9296-483b-a3f7-b22c375bcb5b" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="14335b7e-de81-46a6-be62-518bfc4d1396" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="0f612695-780f-48cc-8e2b-7e86601ae82d" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="APIkit Router" doc:id="c3d6d28a-0dd8-405f-82dc-7a90fbfe15ac" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-process-end-logging-subflow" doc:id="90a65538-3db2-463f-97d7-26ec03c6c657" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="a06be864-4f3d-43e9-8059-9a09733e2a13" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to product-pricing-sys-api-main" doc:id="89e64b41-2d47-47a3-a203-71704d76eb3f" name="product-pricing-sys-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="APIkit Router" doc:id="4a748c67-ce82-4464-991e-d49eea17add3" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:assert-equals doc:name="message" doc:id="8b93d664-40ee-4514-b6de-968c1f0315a2" actual="#[payload.message]" expected='#["Not acceptable"]' />
+		
+</munit:validation>
+	
+</munit:test>
+	<munit:test name="product-pricing-sys-api-test-suite-unsupported-media-type-test" doc:id="cd771f2d-a358-4edd-bd73-f2657ccaff7c" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="492ee211-b2e6-4b26-b1b3-e93b26f4c336" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="0f612695-780f-48cc-8e2b-7e86601ae82d" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="APIkit Router" doc:id="0037351f-652c-4521-a0d5-b907401cf14b" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-process-end-logging-subflow" doc:id="3b8dd2ff-2998-42b2-bb5e-88f98eb58695" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="a06be864-4f3d-43e9-8059-9a09733e2a13" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to product-pricing-sys-api-main" doc:id="95ef754a-58b8-467e-9cdc-93ebf382ace8" name="product-pricing-sys-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="APIkit Router" doc:id="4fcd076a-c11d-49a6-8c79-378245553a01" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:assert-equals doc:name="message" doc:id="770ec0ac-3e52-4396-9641-1a1005f13b10" actual="#[payload.message]" expected='#["Unsupported media type"]' />
+		
+</munit:validation>
+	
+</munit:test>
+	<munit:test name="product-pricing-sys-api-test-suite-not-implemented-test" doc:id="91507196-b6c9-4259-9b8c-4d0638d7615a" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="23322ab8-8e8b-43ff-bca0-a063a0787400" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="0f612695-780f-48cc-8e2b-7e86601ae82d" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="APIkit Router" doc:id="e15dd325-d4ef-4434-ba38-823d50364b9f" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-process-end-logging-subflow" doc:id="f29a1b9b-07f5-498e-a4ef-e37bb29f2c33" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="a06be864-4f3d-43e9-8059-9a09733e2a13" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to product-pricing-sys-api-main" doc:id="22ad2e94-482a-442c-96e9-e5f0b1111769" name="product-pricing-sys-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="APIkit Router" doc:id="b8e6e9e7-7497-4f63-b819-24c5147ea0de" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:assert-equals doc:name="message" doc:id="abf331b4-c399-41f4-a52c-f40d859cdaff" actual="#[payload.message]" expected='#["Not Implemented"]' />
+		
+</munit:validation>
+	
+</munit:test>
+	<munit:test name="product-pricing-sys-api-test-suite-any-test" doc:id="0fca997a-f8c0-47d2-b7e9-2d69995233da" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="918890a3-b287-4ae8-9f25-1b85aa2b1ee6" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="0f612695-780f-48cc-8e2b-7e86601ae82d" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="APIkit Router" doc:id="63852a15-eaa5-4a88-9623-ca12a728bb6e" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="ANY" />
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-error-logging-subflow" doc:id="9fb6e637-b477-4d63-9616-2ba1583b9398" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="f8495b92-ae2c-4dc7-8b11-458abb39e6da" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-process-end-logging-subflow" doc:id="43911704-60fb-481b-9901-d17386b188b1" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="a06be864-4f3d-43e9-8059-9a09733e2a13" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to product-pricing-sys-api-main" doc:id="0aafe451-30d5-42fd-a5c8-7365f3038278" name="product-pricing-sys-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="APIkit Router" doc:id="7af47424-38fe-4452-aa1f-9abc5f887c6d" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="product-pricing-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:assert doc:name="errorPayload" doc:id="b614a146-5f1e-4423-a551-6c238390e470" />
+		
+</munit:validation>
+	
+</munit:test>
+
+	<munit:test name="product-pricing-sys-api-test-suite-delete:\products\(productId):product-pricing-sys-api-configTest" doc:id="e7166324-af5c-41e2-9c38-767cb100c180" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="delete-product-implementation-subflow" doc:id="fa045d79-69d9-49ed-880c-0b64e7bf931a" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="cdb7050c-969c-48df-bbc1-1b92ac8f58fa" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to delete:\products\(productId):product-pricing-sys-api-config" doc:id="93599c5f-706b-49b9-9fde-29908ce9fa38" name="delete:\products\(productId):product-pricing-sys-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="delete-product-implementation-subflow" doc:id="94c61ff0-b005-466a-bb0c-2f2aa22442e2" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="cdb7050c-969c-48df-bbc1-1b92ac8f58fa" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="product-pricing-sys-api-test-suite-patch:\products\(productId):application\json:product-pricing-sys-api-configTest" doc:id="8393e434-85ce-4d6f-9426-6679fd361fc1" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="update-product-implementation-subflow" doc:id="fa145aa3-6e9a-4ebf-a3c7-941b3b169cdb" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="fe27331b-93a6-4e04-a3d9-c2975eb95a68" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to patch:\products\(productId):application\json:product-pricing-sys-api-config" doc:id="5061368d-5b4b-4522-be68-0aaf11e174b4" name="patch:\products\(productId):application\json:product-pricing-sys-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="update-product-implementation-subflow" doc:id="3f4989ef-b064-4f68-bba2-29b2aa406955" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="fe27331b-93a6-4e04-a3d9-c2975eb95a68" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="product-pricing-sys-api-test-suite-get:\health-check:product-pricing-sys-api-configTest" doc:id="195b8e4e-2f4d-490e-b280-823eef67d27c" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="healthcheck-implementation-subflow" doc:id="22cf3173-3bc2-4ab9-9e63-717d791db8ca" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="4234f104-ad55-490c-bdb7-b7f56e087b27" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\health-check:product-pricing-sys-api-config" doc:id="f23f6657-9646-456b-b319-cfe59b81ae7d" name="get:\health-check:product-pricing-sys-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="healthcheck-implementation-subflow" doc:id="d514d6b0-fcbc-4bc9-8efc-17f1969c202c" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="4234f104-ad55-490c-bdb7-b7f56e087b27" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="product-pricing-sys-api-test-suite-get:\ping:product-pricing-sys-api-configTest" doc:id="c8345c72-1f35-4301-bb5a-29476f01a3bd" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="ping-implementation-subflow" doc:id="ed133e83-fe6a-494f-87c5-ddb579e0ff8a" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="c6655401-3aa1-40bb-8d96-064318797f7f" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\ping:product-pricing-sys-api-config" doc:id="027c234b-2ad5-498f-bff2-68a09cca13cd" name="get:\ping:product-pricing-sys-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="ping-implementation-subflow" doc:id="8baac551-630b-4df5-bc90-cdd9c86612c0" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="c6655401-3aa1-40bb-8d96-064318797f7f" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="product-pricing-sys-api-test-suite-get:\products:product-pricing-sys-api-configTest" doc:id="acf0a140-d6e6-4394-8e9a-605de0091dc8" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="get-products-implementation-subflow" doc:id="83554294-54af-414f-9b86-be298a54016b" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="be6e26a5-90df-4942-bbc0-76e790a3205d" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\products:product-pricing-sys-api-config" doc:id="4cebeabb-2f06-4fe3-86d1-cbc7d6f2d56a" name="get:\products:product-pricing-sys-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="get-products-implementation-subflow" doc:id="782dc4df-0f67-4861-9713-68cc266197a4" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="be6e26a5-90df-4942-bbc0-76e790a3205d" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="product-pricing-sys-api-test-suite-post:\products:application\json:product-pricing-sys-api-configTest" doc:id="7a4760ad-65e0-474f-9f04-18b6402b7327" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="post-products-implementation-subflow" doc:id="c0a5438d-a2d2-401e-adab-68750f6cbf33" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="6cde1af4-a9c7-4db3-9379-76ef4eedfa08" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to post:\products:application\json:product-pricing-sys-api-config" doc:id="aa6f8202-9165-4b18-8d6d-e0a2f880bda1" name="post:\products:application\json:product-pricing-sys-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="post-products-implementation-subflow" doc:id="d71d0191-b601-4aaa-a50e-52eb1d83bbce" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="6cde1af4-a9c7-4db3-9379-76ef4eedfa08" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+
+
+</mule>
