@@ -24,7 +24,7 @@ output application/json
 		</ee:transform>
 		<flow-ref doc:name="common-flow-start-logging-subflow" doc:id="c5e0401e-ca04-41ee-bcf0-f8e476bd13af" name="common-flow-start-logging-subflow" />
 		<flow-ref doc:name="common-before-request-logging-subflow" doc:id="7d55f820-cda4-4ae9-b826-b4e5b3185469" name="common-before-request-logging-subflow"/>
-		<salesforce:query doc:name="Query" doc:id="cf716516-b6b3-4e86-966d-f14bb8f16324" config-ref="salesforce-config">
+		<salesforce:query doc:name="getProductId" doc:id="cf716516-b6b3-4e86-966d-f14bb8f16324" config-ref="salesforce-config">
 			<salesforce:salesforce-query><![CDATA[#[vars.queryProductId]]]></salesforce:salesforce-query>
 		</salesforce:query>
 		<flow-ref doc:name="common-after-request-logging-subflow" doc:id="e24eb447-aa5a-419c-9d75-462f80972a4c" name="common-after-request-logging-subflow"/>

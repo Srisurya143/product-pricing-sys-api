@@ -29,7 +29,7 @@ output application/json
 "SELECT ProductCode, ExternalId__c, CurrencyCode__c, Description, Name, ProductPrice__c From Product2 ORDER BY CreatedDate DESC LIMIT " ++ attributes.queryParams.'limit' ++ " OFFSET " ++ attributes.queryParams.'offset']]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<salesforce:query doc:name="Query" doc:id="b8752e6d-20be-4700-a84d-15db90563ca9" config-ref="salesforce-config" targetValue="#[output json --- payload]">
+		<salesforce:query doc:name="getProducts" doc:id="b8752e6d-20be-4700-a84d-15db90563ca9" config-ref="salesforce-config" targetValue="#[output json --- payload]">
 			<salesforce:salesforce-query ><![CDATA[#[payload]]]></salesforce:salesforce-query>
 		</salesforce:query>
 		<ee:transform doc:name="getAllProductsResponse" doc:id="1b385267-53e8-4d07-8bd0-73994288cffa" >

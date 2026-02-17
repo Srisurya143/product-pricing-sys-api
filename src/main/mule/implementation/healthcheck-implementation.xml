@@ -23,7 +23,7 @@ vars.loggingVars update {
 		<flow-ref doc:name="common-flow-start-logging-subflow" doc:id="57945dc8-e717-45ca-b780-019100a449ae" name="common-flow-start-logging-subflow" />
 		<flow-ref doc:name="common-before-request-logging-subflow" doc:id="bde35dae-b9ca-42a7-bce4-fe6ed5366c46" name="common-before-request-logging-subflow"/>
 		<try doc:name="Try" doc:id="93ae7baf-3445-4bfc-a337-5a9c1b08eade" >
-			<salesforce:query doc:name="Query" doc:id="97e47d3e-ac63-4750-8842-833eb1a71360" config-ref="salesforce-config">
+			<salesforce:query doc:name="getAccountId" doc:id="97e47d3e-ac63-4750-8842-833eb1a71360" config-ref="salesforce-config">
 				<salesforce:salesforce-query ><![CDATA[Select Id from Account limit 1]]></salesforce:salesforce-query>
 			</salesforce:query>
 			<ee:transform doc:name="responseMessage" doc:id="1d8a3814-0f89-4f83-bfa0-c360c3c97306" >
