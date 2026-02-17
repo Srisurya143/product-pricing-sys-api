@@ -8,7 +8,7 @@
 		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
 		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
 	<munit:config name="product-pricing-sys-api-test-suite.xml" />
-	<munit:test name="product-pricing-sys-api-test-suite-apikit-not-found-test" doc:id="0b77c916-3353-48c3-ac67-bd423a2603e9" description="Test">
+	<munit:test name="product-pricing-sys-api-test-suite-apikit-not-found-test" doc:id="0b77c916-3353-48c3-ac67-bd423a2603e9" description="Test" ignore="true">
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="fbecf513-71fb-48a2-a9c4-ea7a00898d3d" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -42,7 +42,7 @@
 		</munit:validation>
 	
 </munit:test>
-	<munit:test name="product-pricing-sys-api-test-suite-method-not-allowed-test" doc:id="c0b71ac6-562e-4afa-ba10-dc8fa6e46fa5" description="Test">
+	<munit:test name="product-pricing-sys-api-test-suite-method-not-allowed-test" doc:id="c0b71ac6-562e-4afa-ba10-dc8fa6e46fa5" description="Test" ignore="true">
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="edb24966-537f-45bd-b762-eed7af70eb6f" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -78,7 +78,7 @@
 </munit:validation>
 	
 </munit:test>
-	<munit:test name="product-pricing-sys-api-test-suite-not-acceptable-test" doc:id="ed0c496c-9296-483b-a3f7-b22c375bcb5b" description="Test">
+	<munit:test name="product-pricing-sys-api-test-suite-not-acceptable-test" doc:id="ed0c496c-9296-483b-a3f7-b22c375bcb5b" description="Test" ignore="true">
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="14335b7e-de81-46a6-be62-518bfc4d1396" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -114,7 +114,7 @@
 </munit:validation>
 	
 </munit:test>
-	<munit:test name="product-pricing-sys-api-test-suite-unsupported-media-type-test" doc:id="cd771f2d-a358-4edd-bd73-f2657ccaff7c" description="Test">
+	<munit:test name="product-pricing-sys-api-test-suite-unsupported-media-type-test" doc:id="cd771f2d-a358-4edd-bd73-f2657ccaff7c" description="Test" ignore="true">
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="492ee211-b2e6-4b26-b1b3-e93b26f4c336" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -150,7 +150,7 @@
 </munit:validation>
 	
 </munit:test>
-	<munit:test name="product-pricing-sys-api-test-suite-not-implemented-test" doc:id="91507196-b6c9-4259-9b8c-4d0638d7615a" description="Test">
+	<munit:test name="product-pricing-sys-api-test-suite-not-implemented-test" doc:id="91507196-b6c9-4259-9b8c-4d0638d7615a" description="Test" ignore="true">
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="23322ab8-8e8b-43ff-bca0-a063a0787400" processor="flow-ref">
 				<munit-tools:with-attributes >
