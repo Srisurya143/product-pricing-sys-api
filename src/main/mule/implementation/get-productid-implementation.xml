@@ -9,17 +9,17 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 		<ee:transform doc:name="updateFlowname" doc:id="72761773-fb2e-42f2-83bd-ca1294354725" >
 			<ee:message />
 			<ee:variables >
-				<ee:set-variable variableName="flowName" ><![CDATA[%dw 2.0
+				<ee:set-variable variableName="queryProductId" ><![CDATA[%dw 2.0
+output application/json
+---
+"SELECT Id FROM Product2 where ExternalId__c= '" ++ attributes.uriParams.'productId' ++ "'"]]></ee:set-variable>
+				<ee:set-variable variableName="loggingVars" ><![CDATA[%dw 2.0
 output application/json
 ---
 vars.loggingVars update {
 	case .flowName -> "get-productid-implementation-subflow"
 }
 ]]></ee:set-variable>
-				<ee:set-variable variableName="queryProductId" ><![CDATA[%dw 2.0
-output application/json
----
-"SELECT Id FROM Product2 where ExternalId__c= '" ++ attributes.uriParams.'productId' ++ "'"]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
 		<flow-ref doc:name="common-flow-start-logging-subflow" doc:id="c5e0401e-ca04-41ee-bcf0-f8e476bd13af" name="common-flow-start-logging-subflow" />
