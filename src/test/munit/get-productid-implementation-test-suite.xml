@@ -8,52 +8,46 @@
 		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
 		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
 	<munit:config name="get-productid-implementation-test-suite.xml" />
-	<munit:test name="get-productid-implementation-test-suite-get-productid-implementation-subflowTest" doc:id="1c61dd9a-973e-491c-8b08-923cb8841188" description="Test">
+	<munit:test name="get-productid-implementation-test-suite-get-productid-implementation-subflowTest1" doc:id="f9094b71-80d2-48c9-9c10-40cbe480cbaf" description="Test">
 		<munit:behavior >
-			<munit-tools:mock-when doc:name="common-flow-start-logging-subflow" doc:id="e1ac7c2b-31da-4190-8547-186427600fd2" processor="flow-ref">
+			<munit-tools:mock-when doc:name="common-flow-start-logging-subflow" doc:id="ad8b94f6-11be-416f-a379-7fbb5dc2999a" processor="flow-ref">
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="c5e0401e-ca04-41ee-bcf0-f8e476bd13af" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 			</munit-tools:mock-when>
-			<munit-tools:mock-when doc:name="common-before-request-logging-subflow" doc:id="01b046db-1ffb-448e-83f4-8b329ab3df03" processor="flow-ref">
+			<munit-tools:mock-when doc:name="Mock when" doc:id="56bcf03c-e614-441f-8fc2-3442e683f863" processor="flow-ref">
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="7d55f820-cda4-4ae9-b826-b4e5b3185469" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 			</munit-tools:mock-when>
-			<munit-tools:mock-when doc:name="salesforce-query"
-                       processor="salesforce:query">
-    <munit-tools:with-attributes>
-        <munit-tools:with-attribute
-            whereValue="cf716516-b6b3-4e86-966d-f14bb8f16324"
-            attributeName="doc:id" />
-    </munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:payload value="readUrl('classpath://testVars/getProductByIdTest.json')" mediaType="application/json" encoding="UTF-8" />
-				</munit-tools:then-return>
-</munit-tools:mock-when><munit-tools:mock-when doc:name="common-after-request-logging-subflow" doc:id="d99dd56c-3227-489e-89fe-b122ec51c270" processor="flow-ref">
+			<munit-tools:mock-when doc:name="Query" doc:id="e103a51f-89fd-4529-8f22-8a330b87b455" processor="salesforce:query">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="cf716516-b6b3-4e86-966d-f14bb8f16324" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="common-after-request-logging-subflow" doc:id="59837b50-e5b4-44ca-a040-464f55f1196f" processor="flow-ref">
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="e24eb447-aa5a-419c-9d75-462f80972a4c" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 			</munit-tools:mock-when>
-			<munit-tools:mock-when doc:name="common-flow-end-logging-subflow" doc:id="995a1765-2659-444a-a4a7-211415eb61e9" processor="flow-ref">
+			<munit-tools:mock-when doc:name="common-flow-end-logging-subflow" doc:id="e5229d73-7fc8-41c5-89c0-3d920f7b7185" processor="flow-ref">
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="b3e4a4fe-3913-4d1a-a163-2fe09196cbdd" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 			</munit-tools:mock-when>
 		</munit:behavior>
 		<munit:execution >
-			<munit:set-event doc:name="Set Event" doc:id="5ae8621c-607d-4dfb-8531-8af084953ce3" >
-				<munit:attributes value="#[readUrl('classpath://testVars/attributes.json')]" encoding="UTF-8" mediaType="application/json" />
+			<munit:set-event doc:name="Set Event" doc:id="0acc3435-3c87-4cc5-a779-b83520cb1f85" >
+				<munit:attributes value="#[output json --- readUrl('classpath://testVars/attributes.json')]" encoding="UTF-8" mediaType="application/json" />
 			</munit:set-event>
-			<flow-ref doc:name="Flow-ref to get-productid-implementation-subflow" doc:id="ad0ca51c-7b30-4cc5-8220-993fd50360cd" name="get-productid-implementation-subflow"/>
+			<flow-ref doc:name="Flow-ref to get-productid-implementation-subflow" doc:id="f1408600-7b1b-49de-85ab-f28826c53928" name="get-productid-implementation-subflow"/>
 		</munit:execution>
 		<munit:validation >
-			<munit-tools:verify-call doc:name="salesforce-query" doc:id="73946010-480f-4175-8a73-9ce13cb221d3" processor="salesforce:query" >
+			<munit-tools:verify-call doc:name="Query" doc:id="b66f0859-ab4d-4d35-ab78-cebba9d24601" processor="salesforce:query">
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="cf716516-b6b3-4e86-966d-f14bb8f16324" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 			</munit-tools:verify-call>
-			<munit-tools:assert doc:name="sfdc-query-response" doc:id="eb1274b3-17a2-440d-b4cb-4e14010a18a6" />
 		</munit:validation>
 	</munit:test>
 
