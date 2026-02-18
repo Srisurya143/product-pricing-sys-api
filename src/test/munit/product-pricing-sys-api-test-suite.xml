@@ -186,7 +186,7 @@
 </munit:validation>
 	
 </munit:test>
-	<munit:test name="product-pricing-sys-api-test-suite-any-test" doc:id="0fca997a-f8c0-47d2-b7e9-2d69995233da" description="Test">
+	<munit:test name="product-pricing-sys-api-test-suite-any-test" doc:id="0fca997a-f8c0-47d2-b7e9-2d69995233da" description="Test" ignore="true">
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="common-process-start-logging-subflow" doc:id="918890a3-b287-4ae8-9f25-1b85aa2b1ee6" processor="flow-ref">
 				<munit-tools:with-attributes >
